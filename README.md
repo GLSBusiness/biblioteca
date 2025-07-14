@@ -114,3 +114,106 @@ php artisan migrate --seed
 
 php artisan serve
 
+##enpoint disponibles 
+Método	   Ruta        	Descripción
+GET	    /api/libros 	Listar todos los libros (paginado)
+GET	  /api/libros/{id}	Mostrar detalles de un libro
+POST   /api/libros	     Crear un nuevo libro
+PUT	/api/libros/{id}	 Actualizar un libro existente
+DELETE	/api/libros/{id}	 Eliminar un libro
+
+##Integración con Open Library
+Cuando se crea o actualiza un libro, se consulta automáticamente la API de Open Library utilizando el título. Si encuentra resultados, se agregan los siguientes campos:
+
+Descripción del libro
+
+Número estimado de páginas
+
+Año de publicación original
+
+Esto enriquece automáticamente los datos incluso si no se proporcionan manualmente.
+
+
+##Ejemplo de creación
+
+POST /api/libros
+Content-Type: application/json
+
+{
+  "titulo": "Pride and Prejudice",
+  "autor": "Jane Austen"
+}
+
+##Optimización de consultas
+
+El endpoint de listado /api/libros usa paginación para evitar sobrecarga de memoria o tiempos largos de respuesta.
+
+Parámetros disponibles:
+
+page: número de página (por defecto 1)
+
+per_page: cantidad de libros por página (máximo 50)
+
+##Validación y manejo de errores
+
+Se valida la entrada de datos con reglas definidas en el controlador:
+
+titulo: requerido, texto
+
+autor: requerido, texto
+
+anio_publicacion: opcional, numérico
+
+Errores comunes retornan códigos HTTP claros como:
+
+422 Unprocessable Entity (validaciones fallidas)
+
+404 Not Found (libro no encontrado)
+
+########################################Uso con Docker (opcional)#############################
+
+Este proyecto incluye archivos para contenerizar el entorno con Docker y Docker Compose.
+
+Archivos:
+
+Dockerfile
+
+docker-compose.yml
+
+.env.docker
+
+
+ ##pasos##
+  cp .env.docker .env
+docker compose up -d --build
+docker compose exec app php artisan migrate --seed
+      
+#########################Pruebas con Postman o Insomnia################################
+
+        Para probar la API puedes usar cualquier cliente HTTP.
+
+Recuerde establecer Content-Type: application/json y probar los siguientes endpoints:
+
+GET /api/libros
+
+POST /api/libros
+
+PUT /api/libros/{id}
+
+DELETE /api/libros/{id}
+
+---
+
+✅ Este `README.md` incluye:
+
+- El encabezado visual de Laravel
+- Descripción del proyecto
+- Instalación completa
+- Endpoints
+- Integración con Open Library
+- Optimización (paginación)
+- Docker (opcional)
+- Validaciones
+- Pruebas
+-
+
