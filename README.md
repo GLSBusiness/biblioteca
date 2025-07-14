@@ -59,3 +59,58 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+# 📚 API RESTful - Biblioteca de Libros
+
+Este proyecto es una API RESTful desarrollada en **Laravel** y conectada a **MySQL**, diseñada para gestionar una biblioteca de libros. Permite listar, ver, crear, actualizar y eliminar libros.
+
+---
+
+## 🚀 Requisitos
+
+- PHP 8.1 o superior
+- Composer
+- MySQL
+- Laravel 10+
+- Opcional: Docker y Docker Compose (ver Ejercicio 3)
+
+---
+
+## ⚙️ Instalación (Modo local)
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/tu_usuario/biblioteca-api.git
+cd biblioteca-api
+
+2.Instala dependencias con Composer:
+
+composer install
+
+3. Copia el archivo .env y genera la clave:
+
+cp .env.example .env
+php artisan key:generate
+
+4. Configura tu base de datos en .env:
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=biblioteca
+DB_USERNAME=root
+DB_PASSWORD=tu_contraseña
+
+5. Crea la base de datos biblioteca en tu gestor MySQL (phpMyAdmin, Workbench, etc.)
+
+6. Ejecuta migraciones y seeders:
+
+php artisan migrate --seed
+
+7. Inicia el servidor:
+
+php artisan serve
+
